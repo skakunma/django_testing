@@ -24,8 +24,7 @@ class TestCommentCreation(TestCase):
 
     def test_anonymous_user_cant_create_comment(self):
         self.client.post(self.url, data=self.form_data)
-        comments_count = Comment.objects.count()
-        self.assertEqual(comments_count, 0)
+        self.assertFalse(Comment.objects.exists())
 
     def test_user_can_create_comment(self):
         response = self.auth_client.post(self.url, data=self.form_data)
